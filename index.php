@@ -5,17 +5,12 @@ if (!file_exists($config_filename)) {
 }
 $config = json_decode(file_get_contents($config_filename), true);
 
-if($config['fpx']['environment'] == 'Staging'){
-    $env = 'staging';
-    $merchant_code = '001000STG';
-} else {
-    if($config['maintenance'] == 'on'){
-        header('Location:maintenance.php');
-        exit;
-    }
-    $env = 'production';
-    $merchant_code = '';
+if($config['maintenance'] == 'on'){
+    header('Location:maintenance.php');
+    exit;
 }
+$env = 'production';
+$merchant_code = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,57 +64,6 @@ if($config['fpx']['environment'] == 'Staging'){
                     <div class="col-lg-6">
                         <div class="border p-3 mb-3 rounded">
                             <form method="post" action="action.php?id=confirm-payment" id="form-bayar">
-                            <h4>Maklumat Pembayaran</h4>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="merchant">Merchant <span class="text-danger">*</span></label>
-                                        <select name="merchant" id="merchant" class="custom-select" required>
-                                            <option value="">- Pilih Merchant -</option>
-                                            <option value="pearl">Mutiara Technology Sdn Bhd</option>
-                                            <option value="assofa">Yayasan Sofa Negeri Sembilan</option>
-                                            <option value="WEBAFF">Mutiara Technology Sdn Bhd - Affin</option>
-                                            <option value="amanpalestine">Aman Palestin Berhad</option>
-                                            <option value="aldzikr">AL DZIKR ILM</option>
-<option value="mvm">Muslim Volunteer Malaysia</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="amount">Jumlah (RM) <span class="text-danger">*</span></label>
-                                        <input type="number" min="1.00" step="0.01" class="form-control" name="amount" placeholder="Amaun/jumlah" required="" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="amount">
-                                        <p id="warning-message" class="text-danger"></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nama">Nama <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="nama" placeholder="Nama pembayar" required="" pattern=".{3,}">
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <label for="nric">No. Kad Pengenalan <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="nric" placeholder="XXXXXX-XX-XXXX" required="" pattern=".{12,}">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="telefon">No. Telefon <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="telefon" placeholder="01XXXXXXXX" required="" pattern=".{7,}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">E-mail <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Alamat e-mail anda" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="catatan">Catatan</label>
-                                        <textarea class="form-control" name="catatan" rows="5"></textarea>
-                                    </div>
-                                    <small id="emailHelp" class="form-text text-muted">Ruangan bertanda * adalah wajib diisi.</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Credit/Debit Card box-->
-                        <div class="border p-3 mb-3 rounded">
-
                             <h4>Perbankan Internet dan Kad Kredit/Debit</h4>
                             <img src="images/fpx.svg" height="64px" class="float-right">
                             <p class="mb-4 pt-1">Pembayaran menggunakan akaun bank anda</p>
@@ -191,7 +135,7 @@ if($config['fpx']['environment'] == 'Staging'){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <p class="text-white">&copy; 2021 Hakcipta Terpelihara</p>
+                            <p class="text-white">&copy; 2023 Hakcipta Terpelihara</p>
                         </div>
                     </div>
                     <!-- end col -->
@@ -212,34 +156,9 @@ if($config['fpx']['environment'] == 'Staging'){
         <!-- custom js -->
         <script src="js/app.js"></script>
         <script>
-
-            var minAmount = 1;
-            var maxAmount = 30000;
-
-            $('#amount').attr('min', minAmount);
-            $('#amount').attr('max', maxAmount);
-
-            $('#amount').on('keydown keyup change', function(){
-                var char = $(this).val();
-                if(char < minAmount){
-                    $('#warning-message').text('Jumlah minimum adalah RM '+minAmount+'');
-                }else if(char > maxAmount){
-                    $('#warning-message').text('Jumlah maksimum adalah RM '+maxAmount+'');
-                    $(this).val(char.substring(0, maxAmount));
-                }else{
-                    $('#warning-message').text('');
-                }
-            });
-
             $('#fpx').on('change', function() {
 
                 var mode = "01";
-                minAmount = 1;
-                maxAmount = 30000;
-
-                $('#amount').attr('min', minAmount);
-                $('#amount').attr('max', maxAmount);
-
                 $('#bank_code').empty();
                 get_list(mode);
             });
@@ -247,12 +166,6 @@ if($config['fpx']['environment'] == 'Staging'){
             $('#fpx1').on('change', function() {
 
                 var mode = "02";
-                minAmount = 2;
-                maxAmount = 1000000;
-
-                $('#amount').attr('min', minAmount);
-                $('#amount').attr('max', maxAmount);
-
                 $('#bank_code').empty();
                 get_list(mode);
             });
@@ -277,5 +190,4 @@ if($config['fpx']['environment'] == 'Staging'){
            
         </script>
     </body>
-
 </html>
