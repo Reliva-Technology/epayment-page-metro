@@ -68,21 +68,6 @@
 
                                 <dt class="col-md-4">Jumlah</dt>
                                 <dd class="col-md-8">RM <?php echo number_format($_POST['amount'],2) ?? '' ?></dd>
-
-                                <dt class="col-md-4">Nama</dt>
-                                <dd class="col-md-8"><?php echo $_POST['nama'] ?? '' ?></dd>
-
-                                <dt class="col-md-4">No. Kad Pengenalan</dt>
-                                <dd class="col-md-8"><?php echo $_POST['nric'] ?? '' ?></dd>
-
-                                <dt class="col-md-4">E-mail</dt>
-                                <dd class="col-md-8"><?php echo $_POST['email'] ?? '' ?></dd>
-
-                                <dt class="col-md-4">Telefon</dt>
-                                <dd class="col-md-8"><?php echo $_POST['telefon'] ?? '' ?></dd>
-
-                                <dt class="col-md-4">Catatan</dt>
-                                <dd class="col-md-8"><?php echo $_POST['catatan'] ?? '' ?></dd>
                             </dl>
                             <a href="#" onclick="submitForm()" class="btn bg-biru text-white"><i class="fa fa-print"></i> Bayar</a>
                         </div>
