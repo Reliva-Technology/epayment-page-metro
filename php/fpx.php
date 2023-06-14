@@ -38,6 +38,7 @@ class FPX
 				$url = "https://uat.mepsfpx.com.my/FPXMain/RetrieveBankList";
 
 			$data = $this->get_checksum($mode);
+			return $data;die;
 			$content = $this->get_response($url, $data);
 			$token = strtok($content, "&");
 
@@ -47,10 +48,6 @@ class FPX
 				$response_value[$key] = $value;
 				$token = strtok("&");
 			}
-			
-			// temporary to get BC message. Plese remove once in production
-			$bc_file = ROOT_DIR.'/fpx/'. $mode. '-'. $env. '-bc-message.txt';
-			file_put_contents($bc_file, json_encode($response_value));
 
 			$fpx_msgToken = reset($response_value);
 

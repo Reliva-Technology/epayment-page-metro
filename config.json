@@ -1,30 +1,12 @@
 {
-    "email": {
-        "from": "github-hook@perlis.gov.my",
-        "to": "fadli@reliva.com.my"
-    },
-    "endpoints": [
-        {
-            "repo": "lavasystems/demo-epayment",
-            "branch": "master",
-            "action": "Update demo git",
-            "run": "/home/demo/git.sh"
-        }
-    ],
     "fpx": {
-        "environment": "Staging",
-        "exchange-id": "EX00012505",
-        "merchant-code": "pearl",
-        "url": "https://epayment-staging.pearl2u.com/eps/request"
-    },
-    "database": {
-        "host": "localhost",
-        "db": "mutiara",
-        "user": "root",
-        "pass": "root"
+        "environment": "Production",
+        "exchange-id": "EX00004581",
+        "merchant-code": "mymanjung",
+        "url": "https://epayment.mpm.gov.my/eps/request"
     },
     "stringer": {
-        "url": "https://epayment-staging.pearl2u.com/stringer"
+        "url": "https://epayment.mpm.gov.my/stringer"
     },
-    "cache": "30"
+    "cache": "3000"
 }

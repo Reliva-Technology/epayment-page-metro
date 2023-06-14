@@ -12,13 +12,6 @@ $id = filter_var($_REQUEST['id'], FILTER_SANITIZE_STRING);
 switch ($id) {
 
     case 'confirm-payment':
- 
-        if (isset($_POST['email']) && $_POST['email']) {
-            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-        } else {
-            header('location: index.php');
-            exit;
-        }
 
         $data = $_POST;
 

@@ -1,0 +1,36 @@
+/* HIDE RADIO */
+.hiddenradio [type=radio] { 
+  position: absolute;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  outline: none;
+  box-shadow: 15px 15px 25px rgba(2,28,53,0.05);
+}
+
+/* IMAGE STYLES */
+.hiddenradio [type=radio] + img {
+  cursor: pointer;
+  margin: 10px;
+}
+
+.bank {
+  padding: 5px;
+  cursor:pointer;
+  background-size:contain;
+  background-repeat:no-repeat;
+  display:inline-block;
+  width:100px;
+  height:100px;
+  -webkit-transition: all 100ms ease-in;
+      -moz-transition: all 100ms ease-in;
+          transition: all 100ms ease-in;
+    
+}
+
+.hiddenradio [type=radio] + img:checked .bank{
+  border: 1px solid #747779;
+  -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+          -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+                filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
