@@ -1,11 +1,9 @@
 /* HIDE RADIO */
 .hiddenradio [type=radio] { 
   position: absolute;
-  border-radius: 10px;
+  top: 20px;
+  left: 30px;
   cursor: pointer;
-  border: 3px solid transparent;
-  outline: none;
-  box-shadow: 15px 15px 25px rgba(2,28,53,0.05);
 }
 
 /* IMAGE STYLES */
@@ -33,4 +31,8 @@
   -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
           -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
                 filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.hiddenradio label {
+  font-weight: normal;
 }

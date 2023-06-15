@@ -38,7 +38,6 @@ class FPX
 				$url = "https://uat.mepsfpx.com.my/FPXMain/RetrieveBankList";
 
 			$data = $this->get_checksum($mode);
-			return $data;die;
 			$content = $this->get_response($url, $data);
 			$token = strtok($content, "&");
 

@@ -5,7 +5,10 @@ if (!file_exists($config_filename)) {
 }
 $config = json_decode(file_get_contents($config_filename), true);
 $env = 'production';
-$merchant_code = '';
+// Takes raw data from the request
+$json = file_get_contents('php://input');
+// Converts it into a PHP object
+$input = json_decode($json, true);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,10 +44,63 @@ $merchant_code = '';
                     <div class="col-lg-6">
                         <div class="card border">
                             <div class="card-header">
-                            <h4>Perbankan Internet dan Kad Kredit/Debit</h4>
+                                <h4>Maklumat Pembayaran</h4>
                             </div>
                             <div class="card-body">
                                 <form method="post" action="action.php?id=confirm-payment" id="form-bayar">
+
+                                <div class="form-group row">
+                                    <label for="merchant" class="col-lg-3 col-form-label">Agensi</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="merchant" value="MyManjung - Majlis Perbandaran Manjung" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="trans_id" class="col-lg-3 col-form-label">ID Transaksi</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="TRANS_ID" value="<?php echo $input['TRANS_ID'] ?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="payee_name" class="col-lg-3 col-form-label">Nama Pembayar</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="payee_name" value="<?php echo $input['payee_name'] ?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="payee_email" class="col-lg-3 col-form-label">Email</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="EMAIL" value="<?php echo $input['payee_email'] ?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="amount" class="col-lg-3 col-form-label">Jumlah</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="AMOUNT" value="<?php echo $input['AMOUNT'] ?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="description" class="col-lg-3 col-form-label">Keterangan</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" readonly class="form-control" name="description" value="<?php echo $input['payment_details'] ?>" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card border">
+                            <div class="card-header">
+                                <h4>Pilihan Pembayaran</h4>
+                            </div>
+                            <div class="card-body">
+
                                 <img src="images/fpx.svg" height="64px" class="float-right">
                                 <p class="mb-4 pt-1">Pembayaran menggunakan akaun bank anda</p>
 
@@ -92,6 +148,9 @@ $merchant_code = '';
                                 </div>
                             </div>
                             <div class="card-footer">
+                                <input type="hidden" name="MERCHANT_CODE" value="<?php echo $input['MERCHANT_CODE'] ?>">
+                                <input type="hidden" id="bank-code" name="BANK_CODE" value="">
+                                <input type="hidden" id="bank-name" name="BANK_NAME" value="">
                                 <button type="submit" class="btn bg-biru text-white">Pembayaran</button>
                                 </form>
                             </div>
@@ -110,17 +169,22 @@ $merchant_code = '';
         <script src="js/app.js"></script>
         <script>
             $('#fpx').on('change', function() {
-
                 var mode = "01";
                 $('#select_bank').empty();
                 get_list(mode);
+                $('#select_bank').show();
             });
 
             $('#fpx1').on('change', function() {
-
                 var mode = "02";
                 $('#select_bank').empty();
                 get_list(mode);
+                $('#select_bank').show();
+            });
+
+            $('#migs').on('change', function() {
+                $('#select_bank').empty().hide();
+                $('#agree').prop("checked", false);
             });
 
             function get_list(mode){
@@ -134,12 +198,20 @@ $merchant_code = '';
                     },
                     success: function(response) {
                         $.each(response.bank_list, function(key,value){
-                            $('#select_bank').append('<div class="col-lg-3 col-sm-4"><label for="'+ key +'" class="bank"><input type="radio" name="bank_code" id="'+ key +'"><img src="images/bank/'+ key +'.png" height="70" title="'+ value +'" alt="'+ value +'">'+ value +'</label></div>');
+                            $('#select_bank').append('<div class="col-lg-3 col-xs-6"><label for="'+ key +'" class="bank"><input type="radio" id="'+ key +'" value="'+ key +'" class="bank-code" name="bank_code"><img src="images/bank/'+ key +'.png" height="70" title="'+ value +'" alt="'+ value +'">'+ value +'</label></div>');
                         });
                         $('#be_message').val(response.be_message);
+                        $('.bank-code').each(function() {
+                            $(this).click(function() {
+                                let bank_code = $(this).val();
+                                $('#bank-code').val(bank_code);
+                                console.log(bank_code);
+                            });
+                        });
                     }
                 });
             }
+
         </script>
     </body>
 </html>

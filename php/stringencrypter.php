@@ -1,9 +1,9 @@
 <?php
 /*
-*  Title: String Encryptor Helper
-*  Version: 1.0 from 3 August 2017
+*  Title: String Encrypter Helper
+*  Version: 1.1 14/06/2023
 *  Author: Fadli Saad
-*  Website: https://fadli.my
+*  Website: https://reliva.com.my
 */
 class StringEncrypter
 {
@@ -31,7 +31,7 @@ class StringEncrypter
 			throw new Exception ("A non-string value can not be encrypted.");
 
 		$value = self::toPkcs7 ($value);
-		$output = mcrypt_encrypt (MCRYPT_RIJNDAEL_128, $this->key, $value, MCRYPT_MODE_CBC, $this->initialVector);
+		$output = openssl_encrypt($value, 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA, $this->initialVector);
 
 		return base64_encode ($output);
 	}
@@ -41,7 +41,7 @@ class StringEncrypter
 			throw new Exception ("The cipher string must be a non-empty string.");
 
 		$value = base64_decode ($value);
-		$output = mcrypt_decrypt (MCRYPT_RIJNDAEL_128, $this->key, $value, MCRYPT_MODE_CBC, $this->initialVector);
+		$output = openssl_encrypt($value, 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA, $this->initialVector);
 
 		return self::fromPkcs7 ($output);
 	}
@@ -67,13 +67,13 @@ class StringEncrypter
 		if ($valueLen % self::STRENCRYPTER_BLOCK_SIZE > 0)
 			throw new Exception ("The length of the string is not a multiple of block size.");
 
-		$padSize = ord ($value{$valueLen - 1});
+		$padSize = ord($value[$valueLen - 1]);
 
 		if (($padSize < 1) or ($padSize > self::STRENCRYPTER_BLOCK_SIZE))
 			throw new Exception ("The padding size must be a number greater than 0 and less equal than the block size.");
 
 		for ($i = 0; $i < $padSize; $i++) {
-			if (ord ($value{$valueLen - $i - 1}) != $padSize)
+			if (ord ($value[$valueLen - $i - 1]) != $padSize)
 				throw new Exception ("A padded value is not valid.");
 		}
 
