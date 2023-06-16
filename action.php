@@ -33,6 +33,33 @@ switch ($id) {
 
     break;
 
+    case 'choose-bank':
+
+        $data = $_POST;
+        $url = NULL;
+
+        if($data['payment_mode'] == 'migs') $url = 'confirm.php';
+        if($data['payment_mode'] == 'fpx') $url = '02-bank.php';
+        if($data['payment_mode'] == 'fpx1') $url = '02-bank.php';
+
+        echo "<form id='autosubmit' action='".$url."' method='post'>";
+        if (is_array($data) || is_object($data))
+        {
+            foreach ($data as $key => $val) {
+                echo "<input type='hidden' name='".$key."' value='".filter_var($val, FILTER_SANITIZE_STRING)."'>";
+            }
+        }
+        echo "</form>";
+        echo "
+        <script type='text/javascript'>
+            function submitForm() {
+                document.getElementById('autosubmit').submit();
+            }
+            window.onload = submitForm;
+        </script>";
+
+    break;
+
 	case 'process-payment':
 	
 		require_once('php/payment.php');

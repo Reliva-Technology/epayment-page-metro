@@ -5,6 +5,16 @@ if (!file_exists($config_filename)) {
 }
 $config = json_decode(file_get_contents($config_filename), true);
 $env = 'production';
+$mode = $_POST['payment_mode'];
+if($mode == 'fpx'){
+    $fpx = '01';
+    $bank_type = 'Individual';
+    $bank_description = 'For payment minimum RM 1 up to RM 30,000';
+} else {
+    $fpx = '02';
+    $bank_type = 'Corporate';
+    $bank_description = 'For payment minimum RM 2 up to RM 1,000,000';
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -30,8 +40,8 @@ $env = 'production';
         <div class="page-content">
             <div class="card">
                 <div class="content mb-2">
-                    <h3>Online Banking (Personal)</h3>
-                    <p>For payment up to RM 30,000</p>
+                    <h3>Online Banking (<?php echo $bank_type ?>)</h3>
+                    <p><?php echo $bank_description ?></p>
                     <div class="list-group list-custom-small" id="bank-list"></div>
                 </div>
             </div>
@@ -50,7 +60,7 @@ $env = 'production';
                 dataType: "json",
                 url: "php/bank-list.php",
                 data:{
-                    mode: '01',
+                    mode: '<?php echo $fpx ?>',
                     env: '<?php echo $env ?>'
                 },
                 success: function(response) {
