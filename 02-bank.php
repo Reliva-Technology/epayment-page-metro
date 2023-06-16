@@ -4,6 +4,11 @@ if (!file_exists($config_filename)) {
     throw new Exception("Can't find ".$config_filename);
 }
 $config = json_decode(file_get_contents($config_filename), true);
+$data = $_POST;
+$payload = NULL;
+foreach ($data as $key => $val) {
+    $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+}
 $env = 'production';
 $mode = $_POST['payment_mode'];
 if($mode == 'fpx'){
@@ -27,6 +32,7 @@ if($mode == 'fpx'){
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>E-Payment</title>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
     <link
         href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&display=swap"
         rel="stylesheet">
@@ -42,12 +48,22 @@ if($mode == 'fpx'){
                 <div class="content mb-2">
                     <h3>Online Banking (<?php echo $bank_type ?>)</h3>
                     <p><?php echo $bank_description ?></p>
+                    <div class="extraHeader">
+                        <form class="search-form">
+                            <div class="form-group searchbox">
+                                <input type="text" class="form-control" placeholder="Search..." id="filter">
+                                <i class="fa-solid fa-magnifying-glass" style="left: 30px;position: fixed;"></i>
+                            </div>
+                        </form>
+                    </div>
                     <div class="list-group list-custom-small" id="bank-list"></div>
                 </div>
             </div>
             <form method="post" action="action.php?id=confirm-payment" id="form-bayar">
                 <input type="hidden" id="bank-code" name="BANK_CODE" value="">
                 <input type="hidden" id="bank-name" name="BANK_NAME" value="">
+                <input type="hidden" id="be_message" name="BE_MESSAGE">
+                <?php echo $payload ?>
             </form>
         </div>
     </div>
@@ -82,5 +98,30 @@ if($mode == 'fpx'){
         }
         get_list();
 
+        $("#filter").keyup(function() {
+
+            // Retrieve the input field text and reset the count to zero
+            var filter = $(this).val(),
+            count = 0;
+
+            // Loop through the comment list
+            $('#bank-list a').each(function() {
+
+
+                // If the list item does not contain the text phrase fade it out
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).hide();
+
+                // Show the list item if the phrase matches and increase the count by 1
+                } else {
+                $(this).show();
+                count++;
+                }
+
+            });
+
+        });
+
         </script>
 </body>
+</html>

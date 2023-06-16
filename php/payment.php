@@ -18,13 +18,11 @@ class Payment
     # process online payment
     public function process($data)
     {
-        require ('conn.php');
-
         if(isset($data)){
 
-            //$merchant_code = $this->config['fpx']['merchant-code'];
-            $merchant_code = $data['merchant'];
+            $merchant_code = $data['MERCHANT_CODE'];
             $payment_mode = $data['payment_mode'];
+            $transaction_id = $data['ORDER_ID'];
 
             if($payment_mode == 'fpx' || $payment_mode == 'fpx1'){
                 $payment_method = 'FPX';
@@ -34,7 +32,7 @@ class Payment
 
             $transaction_data = array(
                 'service_id' => 1,
-                'amount' => $data['amount'],
+                'amount' => $data['AMOUNT'],
                 'payment_method' => $payment_method,
                 'payment_mode' => $payment_mode,
                 'status' => '2',
@@ -42,11 +40,10 @@ class Payment
             );
 
             $transaction_extra = array(
-                'nama' => $data['nama'],
-                'nric' => $data['nric'],
-                'telefon' => $data['telefon'],
-                'email' => $data['email'],
-                'catatan' => $data['catatan'],
+                'nama' => $data['CUSTOMER_NAME'],
+                'id' => $data['CUSTOMER_ID'],
+                'telefon' => $data['CUSTOMER_MOBILE'],
+                'email' => $data['CUSTOMER_EMAIL']
             );
 
             $encrypt = new StringerController();
@@ -59,6 +56,7 @@ class Payment
             ];
 
             $checksum = $encrypt->getChecksum($checksum_data);
+            $checksum = json_decode($checksum,true);
 
             $fpx_data = array(
                 'TRANS_ID' => $transaction_id,
@@ -67,16 +65,19 @@ class Payment
                 'PAYEE_EMAIL' => $transaction_extra['email'],
                 'EMAIL' => $transaction_extra['email'],
                 'PAYMENT_MODE' => $transaction_data['payment_mode'],
-                'BANK_CODE' => $data['bank_code'],
-                'BE_MESSAGE' => $data['be_message'],
+                'BANK_CODE' => $data['BANK_CODE'],
+                'BE_MESSAGE' => $data['BE_MESSAGE'],
                 'MERCHANT_CODE' => $merchant_code,
-                'CHECKSUM' => trim($checksum)
+                'CHECKSUM' => trim($checksum['checksum'])
             );
 
             # pass to FPX controller
             echo "<form id=\"myForm\" action=\"".$this->config['fpx']['url']."\" method=\"post\">";
             foreach ($fpx_data as $a => $b) {
                 echo '<input type="hidden" name="'.htmlentities($a).'" value="'.filter_var($b, FILTER_SANITIZE_STRING).'">';
+            }
+            foreach ($transaction_extra as $c => $d) {
+                echo '<input type="hidden" name="'.htmlentities($c).'" value="'.filter_var($d, FILTER_SANITIZE_STRING).'">';
             }
             echo "</form>";
             echo "<script type=\"text/javascript\">
@@ -91,8 +92,6 @@ class Payment
 
     public function response()
     {
-        require ('conn.php');
-
         $input = $_POST;
 
         $fpx_data = [

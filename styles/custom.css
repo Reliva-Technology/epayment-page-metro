@@ -1,0 +1,28 @@
+.search-form {
+    display: block;
+    width: 100%;
+}
+.searchbox {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.searchbox .form-control {
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid #E1E1E1 !important;
+    padding: 0 16px 0 36px;
+    font-size: 15px;
+    box-shadow: none !important;
+    color: #141515;
+}
+textarea, .form-control {
+    background-clip: padding-box;
+    background-image: linear-gradient(transparent, transparent);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

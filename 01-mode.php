@@ -4,6 +4,11 @@ if (!file_exists($config_filename)) {
     throw new Exception("Can't find ".$config_filename);
 }
 $config = json_decode(file_get_contents($config_filename), true);
+$data = file_get_contents('php://input');
+$payload = NULL;
+foreach (json_decode($data) as $key => $val) {
+    $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -41,6 +46,7 @@ $config = json_decode(file_get_contents($config_filename), true);
             </div>
             <form method="post" action="action.php?id=choose-bank" id="form-bayar">
                 <input type="hidden" id="payment-mode" name="payment_mode" value="">
+                <?php echo $payload ?>
             </form>
         </div>
     </div>
@@ -56,3 +62,4 @@ $config = json_decode(file_get_contents($config_filename), true);
         });
     </script>
 </body>
+</html>
