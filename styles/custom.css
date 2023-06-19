@@ -26,3 +26,7 @@ textarea, .form-control {
     -moz-appearance: none;
     appearance: none;
 }
+
+.list-custom-small > *:last-child{
+    border-bottom: none;
+ }
