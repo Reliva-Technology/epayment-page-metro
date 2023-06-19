@@ -30,28 +30,32 @@ foreach (json_decode($data) as $key => $val) {
 </head>
 
 <body class="theme-light">
-    <div id="page">
-        <div class="page-content">
-            <div class="card">
-                <div class="content mb-2">
-                    <h3>Payment Mode</h3>
-                    <p>Choose Online Banking or Credit/Debit Card</p>
-                    <div class="list-group list-custom-small">
-                        <a href="#" class="payment-mode" data-payment-mode="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Personal Banking</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Corporate Banking</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Credit/Debit Card</span><i class="fa fa-angle-right"></i></a>
-                    </div>
-                    <div class="alert alert-primary mt-2">Individu: Minimum RM 1.00 dan maksimum RM 30,000.00<br>Korporat: Minimum RM 2.00 dan maksimum RM 1,000,000.00</div>
-                </div>
+    <div class="card">
+        <div class="content mb-2">
+            <h3 class="text-center">Cara Pembayaran</h3>
+            <p class="text-center">Pilih Perbankan Internet (Individu/Korporat) atau Kad Kredit/Debit</p>
+            <div class="list-group list-custom-small">
+                <a href="#" class="payment-mode" data-payment-mode="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
+                <a href="#" class="payment-mode" data-payment-mode="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
+                <a href="#" class="payment-mode" data-payment-mode="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
             </div>
-            <form method="post" action="action.php?id=choose-bank" id="form-bayar">
-                <input type="hidden" id="payment-mode" name="payment_mode" value="">
-                <?php echo $payload ?>
-            </form>
+            <dl class="mt-2">
+                <dt>Perbankan Individu</dt>
+                <dd>Minimum RM 1.00 dan maksimum RM 30,000.00</dd>
+                <dt>Perbankan Korporat</dt>
+                <dd>Minimum RM 2.00 dan maksimum RM 1,000,000.00</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <p class="text-center">Perkhidmatan pembayaran ini disediakan oleh Reliva Technology Sdn Bhd untuk Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; 2023</p>
         </div>
     </div>
+    <form method="post" action="action.php?id=choose-bank" id="form-bayar">
+        <input type="hidden" id="payment-mode" name="payment_mode" value="">
+        <?php echo $payload ?>
+    </form>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <script>
         $('.payment-mode').each(function() {
             $(this).click(function() {

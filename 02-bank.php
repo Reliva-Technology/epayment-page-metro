@@ -13,12 +13,12 @@ $env = 'production';
 $mode = $_POST['payment_mode'];
 if($mode == 'fpx'){
     $fpx = '01';
-    $bank_type = 'Individual';
-    $bank_description = 'For payment minimum RM 1 up to RM 30,000';
+    $bank_type = 'Individu';
+    $bank_description = 'Bagi pembayaran minimum RM 1.00 dan maksimum RM 30,000.00 (termasuk caj jika ada)';
 } else {
     $fpx = '02';
-    $bank_type = 'Corporate';
-    $bank_description = 'For payment minimum RM 2 up to RM 1,000,000';
+    $bank_type = 'Korporat';
+    $bank_description = 'Bagi pembayaran minimum RM 2.00 dan maksimum RM 1,000,000.00 (termasuk caj jika ada)';
 }
 ?>
 <!DOCTYPE HTML>
@@ -46,17 +46,23 @@ if($mode == 'fpx'){
         <div class="page-content">
             <div class="card">
                 <div class="content mb-2">
-                    <h3>Online Banking (<?php echo $bank_type ?>)</h3>
-                    <p><?php echo $bank_description ?></p>
+                    <h3 class="text-center">Perbankan Internet (<?php echo $bank_type ?>)</h3>
+                    <p class="text-center"><?php echo $bank_description ?></p>
                     <div class="extraHeader">
                         <form class="search-form">
                             <div class="form-group searchbox">
-                                <input type="text" class="form-control" placeholder="Search..." id="filter">
+                                <input type="text" class="form-control" placeholder="Cari..." id="filter">
                                 <i class="fa-solid fa-magnifying-glass" style="left: 30px;position: fixed;"></i>
                             </div>
                         </form>
                     </div>
                     <div class="list-group list-custom-small" id="bank-list"></div>
+                    <div class="d-grid gap-2 col-6 mx-auto mt-2">
+                        <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="text-center">Perkhidmatan pembayaran ini disediakan oleh Reliva Technology Sdn Bhd untuk Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; 2023</p>
                 </div>
             </div>
             <form method="post" action="action.php?id=confirm-payment" id="form-bayar">
@@ -68,7 +74,7 @@ if($mode == 'fpx'){
         </div>
     </div>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <script>
         function get_list(){
             $.ajax({

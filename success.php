@@ -4,16 +4,6 @@ if (!file_exists($config_filename)) {
     throw new Exception("Can't find ".$config_filename);
 }
 $config = json_decode(file_get_contents($config_filename), true);
-$mode = $_POST['payment_mode'];
-if($mode == 'fpx'){
-    $fpx = '01';
-    $bank_type = 'Individual';
-    $bank_description = 'For payment minimum RM 1 up to RM 30,000';
-} else {
-    $fpx = '02';
-    $bank_type = 'Corporate';
-    $bank_description = 'For payment minimum RM 2 up to RM 1,000,000';
-}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -38,7 +28,7 @@ if($mode == 'fpx'){
 <body class="theme-light">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title text-center">Maklumat Pembayaran</h5>
+            <h5 class="card-title text-center">Status Pembayaran</h5>
         </div>
         <div class="card-body">
             <dl>
