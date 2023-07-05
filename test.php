@@ -13,10 +13,10 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS =>'{
     "AMOUNT":"35.10",
     "MERCHANT_CODE":"mymanjung",
-    "ORDER_ID":"MPMM50633231882",
+    "ORDER_ID":"MPMM50633231885",
     "CUSTOMER_ID":"13422",
-    "CUSTOMER_NAME":"Mohd Ali bin Abu",
-    "CUSTOMER_EMAIL":"test@test.com",
+    "CUSTOMER_NAME":"Mohd Fadli bin Saad",
+    "CUSTOMER_EMAIL":"fadli@reliva.com.my",
     "CUSTOMER_MOBILE":"0137020114",
     "TXN_DESC":"Pembayaran T03000547505"
 }',

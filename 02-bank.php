@@ -62,7 +62,8 @@ if($mode == 'fpx'){
                     </div>
                 </div>
                 <div class="card-footer">
-                    <p class="text-center">Perkhidmatan pembayaran ini disediakan oleh Reliva Technology Sdn Bhd untuk Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; 2023</p>
+                    <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
+                    <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
                 </div>
             </div>
             <form method="post" action="action.php?id=confirm-payment" id="form-bayar">

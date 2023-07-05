@@ -75,10 +75,10 @@ class Payment
             # pass to FPX controller
             echo "<form id=\"myForm\" action=\"".$this->config['fpx']['url']."\" method=\"post\">";
             foreach ($fpx_data as $a => $b) {
-                echo '<input type="hidden" name="'.htmlentities($a).'" value="'.filter_var($b, FILTER_SANITIZE_STRING).'">';
+                echo '<input type="hidden" name="'.htmlentities($a).'" value="'.$b.'">';
             }
             foreach ($transaction_extra as $c => $d) {
-                echo '<input type="hidden" name="'.htmlentities($c).'" value="'.filter_var($d, FILTER_SANITIZE_STRING).'">';
+                echo '<input type="hidden" name="'.htmlentities($c).'" value="'.$d.'">';
             }
             echo "</form>";
             echo "<script type=\"text/javascript\">
@@ -95,59 +95,33 @@ class Payment
     {
         $input = $_POST;
 
-        if($_POST['STATUS'] == '1'){
-            // payment is success
+        $fpx_data['payment_details'] = [
+            'status' => isset($_POST['STATUS']) ? $_POST['STATUS'] : NULL,
+            'status_code' => isset($_POST['STATUS_CODE']) ? $_POST['STATUS_CODE'] : NULL,
+            'status_message' => isset($_POST['STATUS_MESSAGE']) ? $_POST['STATUS_MESSAGE'] : NULL,
+            'payment_datetime' => $_POST['PAYMENT_DATETIME'],
+            'payment_mode' => $_POST['PAYMENT_MODE'],
+            'amount' => $_POST['AMOUNT'],
+            'payment_transaction_id' => $_POST['PAYMENT_TRANS_ID'],
+            'buyer_bank' => $_POST['BUYER_BANK'],
+            'merchant_order_no' => $_POST['MERCHANT_ORDER_NO'],
+            'payment_transaction_id' => $_POST['APPROVAL_CODE'],
+            'trans_id' => $_POST['TRANS_ID'],
+            'approval_code' => $_POST['APPROVAL_CODE'],
+            'buyer_bank' => $_POST['BUYER_BANK'],
+            'buyer_name' => $_POST['BUYER_NAME']
+        ];
 
-            $fpx_data['payment_details'] = [
-                'status' => isset($_POST['STATUS']) ? $_POST['STATUS'] : NULL,
-                'status_code' => isset($_POST['STATUS_CODE']) ? $_POST['STATUS_CODE'] : NULL,
-                'status_message' => isset($_POST['STATUS_MESSAGE']) ? $_POST['STATUS_MESSAGE'] : NULL,
-                'payment_datetime' => $_POST['PAYMENT_DATETIME'],
-                'payment_mode' => $_POST['PAYMENT_MODE'],
-                'amount' => $_POST['AMOUNT'],
-                'payment_transaction_id' => $_POST['PAYMENT_TRANS_ID'],
-                'buyer_bank' => $_POST['BUYER_BANK'],
-                'merchant_order_no' => $_POST['MERCHANT_ORDER_NO'],
-                'payment_transaction_id' => $_POST['APPROVAL_CODE'],
-                'trans_id' => $_POST['TRANS_ID'],
-                'approval_code' => $_POST['APPROVAL_CODE'],
-                'buyer_bank' => $_POST['BUYER_BANK'],
-                'buyer_name' => $_POST['BUYER_NAME']
-            ];
+        $fpx_data['customer_details'] = array(
+            'CUSTOMER_NAME' => $_POST['nama_pelanggan'],
+            'CUSTOMER_ID' => $_POST['id_pelanggan'],
+            'CUSTOMER_MOBILE' => $_POST['telefon_pelanggan'],
+            'CUSTOMER_EMAIL' => $_POST['email_pelanggan'],
+            'TXN_DESC' => $_POST['keterangan_transaksi']
+        );
 
-            $fpx_data['customer_details'] = array(
-                'CUSTOMER_NAME' => $_POST['nama_pelanggan'],
-                'CUSTOMER_ID' => $_POST['id_pelanggan'],
-                'CUSTOMER_MOBILE' => $_POST['telefon_pelanggan'],
-                'CUSTOMER_EMAIL' => $_POST['email_pelanggan'],
-                'TXN_DESC' => $_POST['keterangan_transaksi']
-            );
+        $data = json_encode($fpx_data);
 
-            $data = json_encode($fpx_data);
-
-            // redirect to receipt page
-            echo "<form id=\"receipt\" action=\"success.php\" method=\"post\">";
-            foreach ($_POST as $a => $b) {
-                echo '<input type="hidden" name="'.htmlentities($a).'" value="'.filter_var($b, FILTER_SANITIZE_STRING).'">';
-            }
-            echo '<input type="hidden" name="payload" value="'.base64_encode('eb4yAr').'">';
-            echo "</form>";
-            echo "<script type=\"text/javascript\">
-                document.getElementById('receipt').submit();
-            </script>";
-
-        } else {
-
-            // payment is failed, redirect to error page
-            echo "<form id=\"receipt\" action=\"failed.php\" method=\"post\">";
-            foreach ($input as $a => $b) {
-                echo '<input type="hidden" name="'.htmlentities($a).'" value="'.filter_var($b, FILTER_SANITIZE_STRING).'">';
-            }
-            echo '<input type="hidden" name="payload" value="'.base64_encode('eb4yAr').'">';
-            echo "</form>";
-            echo "<script type=\"text/javascript\">
-                document.getElementById('receipt').submit();
-            </script>";
-        }
+        echo $data;
     }
 }

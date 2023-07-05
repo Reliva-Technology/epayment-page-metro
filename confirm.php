@@ -67,9 +67,10 @@ if($mode == 'fpx'){
                 <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
             </div>
         </div>
-        <div class="card-footer">
-        <p class="text-center">Perkhidmatan pembayaran ini disediakan oleh Reliva Technology Sdn Bhd untuk Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; 2023</p>
-    </div>
+        <div>
+            <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
+            <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
+        </div>
     
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type='text/javascript'>

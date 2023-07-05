@@ -7,7 +7,7 @@ if (!file_exists($config_filename)) {
 
 $config = json_decode(file_get_contents($config_filename), true);
 
-$id = filter_var($_REQUEST['id'], FILTER_SANITIZE_STRING);
+$id = $_REQUEST['id'];
 
 switch ($id) {
 
@@ -19,7 +19,7 @@ switch ($id) {
         if (is_array($data) || is_object($data))
         {
             foreach ($data as $key => $val) {
-                echo "<input type='hidden' name='".$key."' value='".filter_var($val, FILTER_SANITIZE_STRING)."'>";
+                echo "<input type='hidden' name='".$key."' value='".$val."'>";
             }
         }
         echo "</form>";
@@ -46,7 +46,7 @@ switch ($id) {
         if (is_array($data) || is_object($data))
         {
             foreach ($data as $key => $val) {
-                echo "<input type='hidden' name='".$key."' value='".filter_var($val, FILTER_SANITIZE_STRING)."'>";
+                echo "<input type='hidden' name='".$key."' value='".$val."'>";
             }
         }
         echo "</form>";
