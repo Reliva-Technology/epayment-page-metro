@@ -1,19 +1,44 @@
 <?php
+$content_type = $_SERVER["CONTENT_TYPE"];
+
+if(!$content_type){
+    http_response_code(400); // Bad Request
+    echo "Wrong content type";
+}
+
 $config_filename = 'config.json';
+
 if (!file_exists($config_filename)) {
     throw new Exception("Can't find ".$config_filename);
 }
+
 $config = json_decode(file_get_contents($config_filename), true);
-$data = file_get_contents('php://input');
 $payload = NULL;
-if ($data !== null) {
-    foreach (json_decode($data) as $key => $val) {
-        $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+
+if($content_type == 'application/x-www-form-urlencoded'){
+    $data = $_POST;
+    if ($data !== null) {
+        foreach ($data as $key => $val) {
+            $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+        }
+    } else {
+        http_response_code(400); // Bad Request
+        echo "Invalid post data";
     }
-} else {
-    http_response_code(400); // Bad Request
-    echo "Invalid JSON data";
 }
+
+if($content_type == 'application/json'){
+    $data = file_get_contents('php://input');
+    if ($data !== null) {
+        foreach (json_decode($data) as $key => $val) {
+            $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+        }
+    } else {
+        http_response_code(400); // Bad Request
+        echo "Invalid JSON data";
+    }
+}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
