@@ -6,8 +6,13 @@ if (!file_exists($config_filename)) {
 $config = json_decode(file_get_contents($config_filename), true);
 $data = file_get_contents('php://input');
 $payload = NULL;
-foreach (json_decode($data) as $key => $val) {
-    $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+if ($data !== null) {
+    foreach (json_decode($data) as $key => $val) {
+        $payload .= "<input type='hidden' name='".$key."' value='".$val."'>";
+    }
+} else {
+    http_response_code(400); // Bad Request
+    echo "Invalid JSON data";
 }
 ?>
 <!DOCTYPE HTML>
