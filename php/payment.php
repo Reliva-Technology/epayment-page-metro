@@ -40,11 +40,11 @@ class Payment
             );
 
             $transaction_extra = array(
-                'nama_pelanggan' => $data['CUSTOMER_NAME'],
-                'id_pelanggan' => $data['CUSTOMER_ID'],
-                'telefon_pelanggan' => $data['CUSTOMER_MOBILE'],
-                'email_pelanggan' => $data['CUSTOMER_EMAIL'],
-                'keterangan_transaksi' => $data['TXN_DESC']
+                'CUSTOMER_NAME' => $data['CUSTOMER_NAME'],
+                'CUSTOMER_ID' => $data['CUSTOMER_ID'],
+                'CUSTOMER_MOBILE' => $data['CUSTOMER_MOBILE'],
+                'CUSTOMER_EMAIL' => $data['CUSTOMER_EMAIL'],
+                'TXN_DESC' => $data['TXN_DESC']
             );
 
             $encrypt = new StringerController();
