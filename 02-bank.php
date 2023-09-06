@@ -42,11 +42,14 @@ if($mode == 'fpx'){
 </head>
 
 <body class="theme-light">
-    <div id="page">
-        <div class="page-content">
+<section class="section d-flex justify-content-center align-items-center mt-3">
+    <div class="row">
+        <div class="cols">
             <div class="card">
-                <div class="content mb-2">
+            <div class="card-header">
                     <h3 class="text-center">Perbankan Internet (<?php echo $bank_type ?>)</h3>
+                </div>
+                <div class="content mb-2">
                     <p class="text-center"><?php echo $bank_description ?></p>
                     <div class="extraHeader">
                         <form class="search-form">
@@ -74,6 +77,7 @@ if($mode == 'fpx'){
             </form>
         </div>
     </div>
+</section>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script src="scripts/jquery.min.js"></script>
     <script>

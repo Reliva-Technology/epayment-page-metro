@@ -60,27 +60,38 @@ if($content_type == 'application/json'){
 </head>
 
 <body class="theme-light">
-    <div class="card">
-        <div class="content mb-2">
-            <h3 class="text-center">Cara Pembayaran</h3>
-            <p class="text-center">Pilih Perbankan Internet (Individu/Korporat) atau Kad Kredit/Debit</p>
-            <div class="list-group list-custom-small">
-                <a href="#" class="payment-mode" data-payment-mode="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
-                <a href="#" class="payment-mode" data-payment-mode="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
-                <a href="#" class="payment-mode" data-payment-mode="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
+<section class="section d-flex justify-content-center align-items-center mt-3">
+    <div class="row">
+        <div class="cols">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cara Pembayaran</h3>
+                </div>
+                <div class="content mb-2">
+                    <p class="text-center">Pilih Perbankan Internet (Individu/Korporat) atau Kad Kredit/Debit</p>
+                    <div class="list-group list-custom-small">
+                        <a href="#" class="payment-mode" data-payment-mode="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
+                    </div>
+                    <dl class="mt-2">
+                        <dt>Perbankan Individu</dt>
+                        <dd>Minimum RM 1.00 dan maksimum RM 30,000.00</dd>
+                        <dt>Perbankan Korporat</dt>
+                        <dd>Minimum RM 2.00 dan maksimum RM 1,000,000.00</dd>
+                    </dl>
+                    <div class="d-grid gap-2 col-6 mx-auto mt-2">
+                        <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
+                    <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
+                </div>
             </div>
-            <dl class="mt-2">
-                <dt>Perbankan Individu</dt>
-                <dd>Minimum RM 1.00 dan maksimum RM 30,000.00</dd>
-                <dt>Perbankan Korporat</dt>
-                <dd>Minimum RM 2.00 dan maksimum RM 1,000,000.00</dd>
-            </dl>
-        </div>
-        <div class="card-footer">
-            <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
-            <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
         </div>
     </div>
+</section>
     <form method="post" action="action.php?id=choose-bank" id="form-bayar">
         <input type="hidden" id="payment-mode" name="payment_mode" value="">
         <?php echo $payload ?>

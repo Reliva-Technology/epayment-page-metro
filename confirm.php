@@ -36,41 +36,48 @@ if($mode == 'fpx'){
 </head>
 
 <body class="theme-light">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title text-center">Maklumat Pembayaran</h5>
-        </div>
-        <div class="card-body">
-            <dl>
-                <dt>Nama Pembayar</dt><dd><?php echo $_POST['CUSTOMER_NAME'] ?></dd>
-                <dt>E-mail</dt><dd><?php echo $_POST['CUSTOMER_EMAIL'] ?></dd>
-                <dt>No. Telefon</dt><dd><?php echo $_POST['CUSTOMER_MOBILE'] ?></dd>
-                <dt>ID Transaksi</dt><dd><?php echo $_POST['ORDER_ID'] ?></dd>
-                <dt>Keterangan</dt><dd><?php echo $_POST['TXN_DESC'] ?></dd>
-                <dt>Kaedah Pembayaran</dt><dd><?php echo ($_POST['payment_mode'] == 'migs') ? 'Kad Kredit/Debit' : 'Perbankan Internet - '.$_POST['BANK_NAME'] ?></dd>
-                <dt>JUMLAH</dt><dd>RM <?php echo $_POST['AMOUNT'] ?></dd>
-            </dl>
-            <?php
-                $data = $_POST;
+<section class="section d-flex justify-content-center align-items-center mt-3">
+    <div class="row">
+        <div class="cols">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title text-center">Maklumat Pembayaran</h5>
+                </div>
+                <div class="card-body">
+                    <dl>
+                        <dt>Nama Pembayar</dt><dd><?php echo $_POST['CUSTOMER_NAME'] ?></dd>
+                        <dt>E-mail</dt><dd><?php echo $_POST['CUSTOMER_EMAIL'] ?></dd>
+                        <dt>No. Telefon</dt><dd><?php echo $_POST['CUSTOMER_MOBILE'] ?></dd>
+                        <dt>ID Transaksi</dt><dd><?php echo $_POST['ORDER_ID'] ?></dd>
+                        <dt>Keterangan</dt><dd><?php echo $_POST['TXN_DESC'] ?></dd>
+                        <dt>Kaedah Pembayaran</dt><dd><?php echo ($_POST['payment_mode'] == 'migs') ? 'Kad Kredit/Debit' : 'Perbankan Internet - '.$_POST['BANK_NAME'] ?></dd>
+                        <dt>JUMLAH</dt><dd>RM <?php echo $_POST['AMOUNT'] ?></dd>
+                    </dl>
+                    <?php
+                        $data = $_POST;
 
-                echo "<form id='confirm' action='action.php?id=process-payment' method='post'>";
-                if (is_array($data) || is_object($data))
-                {
-                    foreach ($data as $key => $val) {
-                        echo "<input type='hidden' name='".$key."' value='".$val."'>";
-                    }
-                }
-                echo "</form>";
-            ?>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
-                <a href="#" onclick="submitForm()" class="btn btn-primary me-md-2">Bayar</a>
-                <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                        echo "<form id='confirm' action='action.php?id=process-payment' method='post'>";
+                        if (is_array($data) || is_object($data))
+                        {
+                            foreach ($data as $key => $val) {
+                                echo "<input type='hidden' name='".$key."' value='".$val."'>";
+                            }
+                        }
+                        echo "</form>";
+                    ?>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
+                        <a href="#" onclick="submitForm()" class="btn btn-primary me-md-2">Bayar</a>
+                        <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
+                    <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
+                </div>
             </div>
         </div>
-        <div>
-            <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
-            <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
-        </div>
+    </div>
+</section>
     
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type='text/javascript'>
