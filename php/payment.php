@@ -20,7 +20,7 @@ class Payment
     {
         if(isset($data)){
 
-            $merchant_code = $data['MERCHANT_CODE'];
+            $merchant_code = $data['MERCHANT_CODE'] ?? $this->config['fpx']['merchant-code'];
             $payment_mode = $data['payment_mode'];
             $transaction_id = $data['ORDER_ID'];
 
