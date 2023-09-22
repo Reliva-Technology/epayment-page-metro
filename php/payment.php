@@ -111,18 +111,11 @@ class Payment
         }
 
         $data = [
-            'STATUS' => '99',
-            'STATUS_CODE' => '2',
-            'STATUS_MESSAGE' => 'Failed',
+            'STATUS_CODE' => '99',
+            'STATUS_DESC' => 'Failed',
             'TXN_TIMESTAMP' => date("Y-m-d h:i:s"),
             'PAY_TYPE' => $payment_mode,
-            'AMOUNT' => $data['amount'],
-            'ORDER_ID' => $data['ORDER_ID'],
-            'CUSTOMER_NAME' => $data['nama_pelanggan'],
-            'CUSTOMER_ID' => $data['id_pelanggan'],
-            'CUSTOMER_MOBILE' => $data['telefon_pelanggan'],
-            'CUSTOMER_EMAIL' => $data['email_pelanggan'],
-            'TXN_DESC' => $data['keterangan_transaksi']
+            'ORDER_ID' => $input['ORDER_ID']
         ];
 
         # callback to mymanjung
