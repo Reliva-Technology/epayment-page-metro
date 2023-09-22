@@ -111,7 +111,7 @@ class Payment
         }
 
         $data = [
-            'STATUS_CODE' => '99',
+            'STATUS_CODE' => '1C',
             'STATUS_DESC' => 'Failed',
             'TXN_TIMESTAMP' => date("Y-m-d h:i:s"),
             'PAY_TYPE' => $payment_mode,
