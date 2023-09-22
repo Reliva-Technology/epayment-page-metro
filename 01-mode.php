@@ -81,7 +81,7 @@ if($content_type == 'application/json'){
                         <dd>Minimum RM 2.00 dan maksimum RM 1,000,000.00</dd>
                     </dl>
                     <div class="d-grid gap-2 col-6 mx-auto mt-2">
-                        <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                        <a href="#" onclick="cancel()" class="btn btn-danger">Batal</a>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -106,6 +106,11 @@ if($content_type == 'application/json'){
                 $("#form-bayar").submit();
             });
         });
+
+        function cancel() {
+            document.getElementById("form-bayar").action = 'action.php?id=cancel-payment';
+            document.getElementById("form-bayar").submit();
+        }
     </script>
 </body>
 </html>
