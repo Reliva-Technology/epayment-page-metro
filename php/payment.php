@@ -95,20 +95,34 @@ class Payment
     {
         $input = $_POST;
 
+        switch ($input['payment_mode']) {
+            case 'fpx':
+                $payment_mode = 'FPX (Individual)';
+                break;
+            case 'fpx1':
+                $payment_mode = 'FPX (Corporate)';
+                break;
+            case 'migs':
+                $payment_mode = 'Kad Kredit/Debit';
+                break;
+            default:
+                $payment_mode = 'FPX';
+                break;
+        }
+
         $data = [
             'STATUS' => '99',
-            'STATUS_CODE' => '99',
-            'STATUS_MESSAGE' => 'Batal',
-            'PAYMENT_DATE' => date(),
-            'PAYMENT_MODE' => $_POST['PAYMENT_MODE'],
-            'AMOUNT' => $_POST['AMOUNT'],
-            'PAYMENT_TRANS_ID' => $_POST['PAYMENT_TRANS_ID'],
-            'ORDER_ID' => $_POST['ORDER_ID'],
-            'CUSTOMER_NAME' => $_POST['nama_pelanggan'],
-            'CUSTOMER_ID' => $_POST['id_pelanggan'],
-            'CUSTOMER_MOBILE' => $_POST['telefon_pelanggan'],
-            'CUSTOMER_EMAIL' => $_POST['email_pelanggan'],
-            'TXN_DESC' => $_POST['keterangan_transaksi']
+            'STATUS_CODE' => '2',
+            'STATUS_MESSAGE' => 'Failed',
+            'TXN_TIMESTAMP' => date(),
+            'PAY_TYPE' => $payment_mode,
+            'AMOUNT' => $data['amount'],
+            'ORDER_ID' => $data['ORDER_ID'],
+            'CUSTOMER_NAME' => $data['nama_pelanggan'],
+            'CUSTOMER_ID' => $data['id_pelanggan'],
+            'CUSTOMER_MOBILE' => $data['telefon_pelanggan'],
+            'CUSTOMER_EMAIL' => $data['email_pelanggan'],
+            'TXN_DESC' => $data['keterangan_transaksi']
         ];
 
         # callback to mymanjung
