@@ -67,7 +67,7 @@ if($mode == 'fpx'){
                     ?>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
                         <a href="#" onclick="submitForm()" class="btn btn-primary me-md-2">Bayar</a>
-                        <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
+                        <a href="#" onclick="cancel()" class="btn btn-danger">Batal</a>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -83,6 +83,11 @@ if($mode == 'fpx'){
     <script type='text/javascript'>
         function submitForm() {
             document.getElementById('confirm').submit();
+        }
+
+        function cancel() {
+            document.getElementById("confirm").action = 'action.php?id=cancel-payment';
+            submitForm();
         }
     </script>
 </body>
