@@ -8,5 +8,6 @@
     "stringer": {
         "url": "https://epayment.mpm.gov.my/stringer"
     },
-    "cache": "3000"
+    "cache": "3000",
+    "callback": "https://api.mymanjung.gates.my/api/upay/payment-status"
 }

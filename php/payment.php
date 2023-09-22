@@ -114,7 +114,7 @@ class Payment
             'STATUS' => '99',
             'STATUS_CODE' => '2',
             'STATUS_MESSAGE' => 'Failed',
-            'TXN_TIMESTAMP' => date(),
+            'TXN_TIMESTAMP' => date("Y-m-d h:i:s"),
             'PAY_TYPE' => $payment_mode,
             'AMOUNT' => $data['amount'],
             'ORDER_ID' => $data['ORDER_ID'],
