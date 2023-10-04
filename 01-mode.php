@@ -70,9 +70,9 @@ if($content_type == 'application/json'){
                 <div class="content mb-2">
                     <p class="text-center">Pilih Perbankan Internet (Individu/Korporat) atau Kad Kredit/Debit</p>
                     <div class="list-group list-custom-small">
-                        <a href="#" class="payment-mode" data-payment-mode="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx" id="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx1"> id="fpx1"<img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="migs" id="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
                     </div>
                     <dl class="mt-2">
                         <dt>Perbankan Individu</dt>
@@ -101,7 +101,22 @@ if($content_type == 'application/json'){
     <script>
         $('.payment-mode').each(function() {
             $(this).click(function() {
+                let amount = '<?php echo $data['amount'] ?>';
                 let payment_mode = $(this).data('payment-mode');
+
+                if(payment_mode == 'fpx'){
+                    let minAmount = 1;
+                    let maxAmount = 30000;
+                    if(minAmount <= amount <= maxAmount){
+                        $('#fpx').click(function(e){
+                            e.preventDefault();
+                        });
+                    }
+                }
+                if(payment_mode == 'fpx1'){
+                    let minAmount = 2;
+                    let maxAmount = 1000000;
+                }
                 $('#payment-mode').val(payment_mode);
                 $("#form-bayar").submit();
             });
