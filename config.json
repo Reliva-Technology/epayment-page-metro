@@ -2,7 +2,7 @@
     "fpx": {
         "environment": "Production",
         "exchange-id": "EX00008521",
-        "merchant-code": "metro",
+        "merchant-code": "metro-new",
         "url": "https://epayment.theparkspace.com/eps/request"
     },
     "stringer": {
