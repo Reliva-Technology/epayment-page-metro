@@ -8,11 +8,11 @@ $mode = $_POST['payment_mode'];
 if($mode == 'fpx'){
     $fpx = '01';
     $bank_type = 'Individual';
-    $bank_description = 'For payment minimum RM 1 up to RM 30,000';
+    $bank_description = 'For payment minimum RM 1.00 up to RM 30,000';
 } else {
     $fpx = '02';
     $bank_type = 'Corporate';
-    $bank_description = 'For payment minimum RM 2 up to RM 1,000,000';
+    $bank_description = 'For payment minimum RM 2.00 up to RM 1,000,000';
 }
 ?>
 <!DOCTYPE HTML>
@@ -41,17 +41,17 @@ if($mode == 'fpx'){
         <div class="cols">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title text-center">Maklumat Pembayaran</h5>
+                    <h5 class="card-title text-center">Payment Details</h5>
                 </div>
                 <div class="card-body">
                     <dl>
-                        <dt>Nama Pembayar</dt><dd><?php echo $_POST['CUSTOMER_NAME'] ?></dd>
+                        <dt>Payee Name</dt><dd><?php echo $_POST['CUSTOMER_NAME'] ?></dd>
                         <dt>E-mail</dt><dd><?php echo $_POST['CUSTOMER_EMAIL'] ?></dd>
-                        <dt>No. Telefon</dt><dd><?php echo $_POST['CUSTOMER_MOBILE'] ?></dd>
-                        <dt>ID Transaksi</dt><dd><?php echo $_POST['ORDER_ID'] ?></dd>
-                        <dt>Keterangan</dt><dd><?php echo $_POST['TXN_DESC'] ?></dd>
-                        <dt>Kaedah Pembayaran</dt><dd><?php echo ($_POST['payment_mode'] == 'migs') ? 'Kad Kredit/Debit' : 'Perbankan Internet - '.$_POST['BANK_NAME'] ?></dd>
-                        <dt>JUMLAH</dt><dd>RM <?php echo $_POST['AMOUNT'] ?></dd>
+                        <dt>Telephone</dt><dd><?php echo $_POST['CUSTOMER_MOBILE'] ?></dd>
+                        <dt>Transaction ID</dt><dd><?php echo $_POST['ORDER_ID'] ?></dd>
+                        <dt>Details</dt><dd><?php echo $_POST['TXN_DESC'] ?></dd>
+                        <dt>Payment Mode</dt><dd><?php echo ($_POST['payment_mode'] == 'migs') ? 'Credit/Debit Card' : 'Internet Banking - '.$_POST['BANK_NAME'] ?></dd>
+                        <dt>TOTAL AMOUNT</dt><dd>RM <?php echo $_POST['AMOUNT'] ?></dd>
                     </dl>
                     <?php
                         $data = $_POST;
@@ -66,14 +66,14 @@ if($mode == 'fpx'){
                         echo "</form>";
                     ?>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
-                        <a href="#" onclick="submitForm()" class="btn btn-primary me-md-2">Bayar</a>
-                        <a href="#" onclick="cancel()" class="btn btn-danger">Batal</a>
+                        <a href="#" onclick="submitForm()" class="btn btn-primary me-md-2">Make Payment</a>
+                        <a href="#" onclick="cancel()" class="btn btn-danger">Cancel Payment</a>
                     </div>
                 </div>
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
                     <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

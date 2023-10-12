@@ -30,7 +30,7 @@
                                 <div class="form-group row">
                                     <label for="merchant" class="col-lg-3 col-form-label">Agensi</label>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control" name="merchant" value="MyManjung - Majlis Perbandaran Manjung">
+                                        <input type="text" class="form-control" name="merchant" value="METRO">
                                     </div>
                                 </div>
 

@@ -65,29 +65,29 @@ if($content_type == 'application/json'){
         <div class="cols">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Cara Pembayaran</h3>
+                    <h3 class="text-center">Payment Method</h3>
                 </div>
                 <div class="content mb-2">
-                    <p class="text-center">Pilih Perbankan Internet (Individu/Korporat) atau Kad Kredit/Debit</p>
+                    <p class="text-center">Choose Internet Banking (Individual/Corporate) or Credit/Debit Card</p>
                     <div class="list-group list-custom-small">
-                        <a href="#" class="payment-mode" data-payment-mode="fpx" id="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Perbankan Internet (Individu)</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="fpx1"> id="fpx1"<img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Perbankan Internet (Korporat)</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="migs" id="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Kad Kredit/Debit</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx" id="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Internet Banking (Individual)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx1"> id="fpx1"<img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Internet Banking (Corporate)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="migs" id="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Credit/Debit Card</span><i class="fa fa-angle-right"></i></a>
                     </div>
                     <dl class="mt-2">
-                        <dt>Perbankan Individu</dt>
-                        <dd>Minimum RM 1.00 dan maksimum RM 30,000.00</dd>
-                        <dt>Perbankan Korporat</dt>
-                        <dd>Minimum RM 2.00 dan maksimum RM 1,000,000.00</dd>
+                        <dt>Individual Banking</dt>
+                        <dd>Minimum RM 1.00 and maximum RM 30,000.00</dd>
+                        <dt>Corporate Banking</dt>
+                        <dd>Minimum RM 2.00 and maximum RM 1,000,000.00</dd>
                     </dl>
                     <div class="d-grid gap-2 col-6 mx-auto mt-2">
-                        <a href="#" onclick="cancel()" class="btn btn-danger">Batal</a>
+                        <a href="#" onclick="cancel()" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <p class="text-center">Majlis Perbandaran Manjung. Hakcipta Terpelihara &copy; <?php echo date('Y') ?></p>
                     <p class="text-center"><img src="images/logo.png" title="logo" alt="logo" height="48px" class="img"></p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
