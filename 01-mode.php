@@ -71,7 +71,7 @@ if($content_type == 'application/json'){
                     <p class="text-center">Choose Internet Banking (Individual/Corporate) or Credit/Debit Card</p>
                     <div class="list-group list-custom-small">
                         <a href="#" class="payment-mode" data-payment-mode="fpx" id="fpx"><img src="images/fpx.svg" height="48" title="Personal Banking" alt="Personal Banking"><span class="mx-3">Internet Banking (Individual)</span><i class="fa fa-angle-right"></i></a>
-                        <a href="#" class="payment-mode" data-payment-mode="fpx1"> id="fpx1"<img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Internet Banking (Corporate)</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="payment-mode" data-payment-mode="fpx1" id="fpx1"><img src="images/fpx.svg" height="48" title="Corporate Banking" alt="Corporate Banking"><span class="mx-3">Internet Banking (Corporate)</span><i class="fa fa-angle-right"></i></a>
                         <a href="#" class="payment-mode" data-payment-mode="migs" id="migs"><img src="images/visa.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><img src="images/mastercard.svg" height="48" title="Credit/Debit Card" alt="Credit/Debit Card"><span class="mx-3">Credit/Debit Card</span><i class="fa fa-angle-right"></i></a>
                     </div>
                     <dl class="mt-2">
